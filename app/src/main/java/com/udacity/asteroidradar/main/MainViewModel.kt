@@ -38,7 +38,6 @@ class MainViewModel : ViewModel() {
             override fun onFailure(call: Call<PictureOfDay>, t: Throwable) {
                 _response.value = t.message
             }
-
         })
     }
 
@@ -46,11 +45,9 @@ class MainViewModel : ViewModel() {
         NasaApi.retrofitServices.getAsteroids().enqueue(object : retrofit2.Callback<JSONObject>{
             override fun onResponse(call: Call<JSONObject>, response: Response<JSONObject>) {
                 _asteroids.value = response.body()?.let { parseAsteroidsJsonResult(it) }
-
             }
-
             override fun onFailure(call: Call<JSONObject>, t: Throwable) {
-                
+                _response.value = t.message
             }
         })
     }
