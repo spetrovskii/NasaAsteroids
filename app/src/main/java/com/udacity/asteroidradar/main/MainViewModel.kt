@@ -25,8 +25,8 @@ class MainViewModel : ViewModel() {
     val asteroids: LiveData<List<Asteroid>>
         get() = _asteroids
 
-    private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid>()
-    val navigateToSelectedAsteroid: LiveData<Asteroid>
+    private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid?>()
+    val navigateToSelectedAsteroid: MutableLiveData<Asteroid?>
         get() = _navigateToSelectedAsteroid
 
     init {

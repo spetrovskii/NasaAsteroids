@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
         viewModel.navigateToSelectedAsteroid.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
-                //viewModel.displayAsteroidCompleted()
+                viewModel.displayAsteroidCompleted()
             }
 
         })
