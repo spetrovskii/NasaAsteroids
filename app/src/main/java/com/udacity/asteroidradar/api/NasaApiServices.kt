@@ -9,6 +9,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,6 +18,7 @@ private val moshi = Moshi.Builder()
     .build()
 
 private val retrofit = Retrofit.Builder()
+    .addConverterFactory(ScalarsConverterFactory.create())
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl("https://api.nasa.gov")
     .build()
@@ -32,7 +34,7 @@ interface NasaApiServices{
         @Query("start_date") startDate: String = "2015-09-07",
         @Query("end_date") endDate : String = "2015-09-08",
         @Query("api_key") apiKey: String = Constants.API_KEY
-    ): Call<JSONObject>
+    ): Call<String>
 }
 
 object NasaApi{

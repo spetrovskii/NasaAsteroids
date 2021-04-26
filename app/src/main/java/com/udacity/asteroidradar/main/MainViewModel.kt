@@ -42,14 +42,13 @@ class MainViewModel : ViewModel() {
     }
 
     private fun getAsteroids(){
-        NasaApi.retrofitServices.getAsteroids().enqueue(object : retrofit2.Callback<JSONObject>{
-            override fun onResponse(call: Call<JSONObject>, response: Response<JSONObject>) {
-                _asteroids.value = response.body()?.let { parseAsteroidsJsonResult(it) }
+        NasaApi.retrofitServices.getAsteroids().enqueue(object : retrofit2.Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                _asteroids.value = response.body()?.let { parseAsteroidsJsonResult(JSONObject(it)) }
             }
-            override fun onFailure(call: Call<JSONObject>, t: Throwable) {
+            override fun onFailure(call: Call<String>, t: Throwable) {
                 _response.value = t.message
             }
         })
     }
-
 }
