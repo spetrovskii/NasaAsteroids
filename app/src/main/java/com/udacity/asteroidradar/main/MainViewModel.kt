@@ -3,15 +3,13 @@ package com.udacity.asteroidradar.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.NasaApi
-import com.udacity.asteroidradar.api.NasaApiServices
-import kotlinx.coroutines.launch
+import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class MainViewModel : ViewModel() {
 
@@ -45,17 +43,16 @@ class MainViewModel : ViewModel() {
     }
 
     private fun getAsteroids(){
-        NasaApi.retrofitServices.getAsteroids().enqueue(object : retrofit2.Callback<List<Asteroid>>{
-            override fun onResponse(
-                call: Call<List<Asteroid>>,
-                response: Response<List<Asteroid>>
-            ) {
-                _response.value = "There are : ${response.body()?.size} asteroids"
-            }
-            override fun onFailure(call: Call<List<Asteroid>>, t: Throwable) {
-                _response.value = t.message
+        NasaApi.retrofitServices.getAsteroids().enqueue(object : retrofit2.Callback<JSONObject>{
+            override fun onResponse(call: Call<JSONObject>, response: Response<JSONObject>) {
+                _asteroids.value = response.body()?.let { parseAsteroidsJsonResult(it) }
+
             }
 
+            override fun onFailure(call: Call<JSONObject>, t: Throwable) {
+                
+            }
         })
     }
+
 }

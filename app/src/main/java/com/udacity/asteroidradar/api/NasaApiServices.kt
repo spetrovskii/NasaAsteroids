@@ -5,6 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.PictureOfDay
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -31,7 +32,7 @@ interface NasaApiServices{
         @Query("start_date") startDate: String = "2015-09-07",
         @Query("end_date") endDate : String = "2015-09-08",
         @Query("api_key") apiKey: String = Constants.API_KEY
-    ): Call<List<Asteroid>>
+    ): Call<JSONObject>
 }
 
 object NasaApi{
