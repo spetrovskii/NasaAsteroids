@@ -7,11 +7,17 @@ import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
+import com.udacity.asteroidradar.database.AsteroidsDatabase
+import com.udacity.asteroidradar.database.AsteroidsDatabaseDao
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
 class MainViewModel : ViewModel() {
+
+/*class MainViewModel(
+    val database : AsteroidsDatabaseDao,
+    application: Application) : AndroidViewModel(application) {*/
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
